@@ -1,3 +1,4 @@
+
 alias dkl="dk logs"
 
 dk() {
@@ -15,7 +16,7 @@ dla() {
  dls -a
 }
 
-dup() {
+drun() {
  docker run -dit --name $1 ${2:-$1}
 }
 
@@ -49,10 +50,11 @@ dc() {
  docker-compose $@
 }
 
-dcb() {
+dcmake() {
  dc build --no-cache $@
 }
 
-dcu() {
- dc up -d --force-recreate $@
+dcrun() {
+ dc up --build -d --force-recreate $@
 }
+
