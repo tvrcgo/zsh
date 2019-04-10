@@ -4,19 +4,16 @@ alias g="git"
 alias gi="git status"
 alias gps="git push"
 alias gpl="git pull -r"
-alias gm="git merge --no-ff"
-alias gmctn="git merge --continue"
-alias gmabt="git merge --abort"
+alias gm="git merge"
+alias gr="git rebase"
 alias gl="git log --color --graph --abbrev-commit --decorate --pretty=format:'%C(magenta)%h%Creset %C(auto)%d%Creset %C(white)%s%Creset %C(cyan)%cn,%Creset %C(cyan)%cr%Creset' --all"
 alias gcl="git clone"
 alias gcm="git commit -m"
 alias gau="git commit --amend -m"
 alias gam="git commit --amend --no-edit"
-alias gfh="git fetch origin --prune"
+alias gfr="git fetch origin --prune"
 alias gdf="git show --color --pretty=format:%b"
-alias gspu="git stash"
-alias gspo="git stash pop"
-
+alias gst="git stash"
 
 current_branch() {
   git rev-parse --abbrev-ref HEAD
