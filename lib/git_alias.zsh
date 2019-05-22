@@ -122,3 +122,9 @@ gtda() {
   gtdr $1
 }
 
+gsync() {
+  git add -A
+  git stash
+  git pull -r
+  git stash pop -q
+}

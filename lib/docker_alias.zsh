@@ -25,36 +25,32 @@ dbash() {
 }
 
 dsh() {
- docker exec -it $(docker ps -aqf "name=$1") sh
+ docker exec -it $(docker ps -qf "name=$1") sh
 }
 
 drm() {
  if [[ -n $1 ]];then
-  docker stop $(docker ps -a | grep "$1" | awk '{ print $1 }')
-  docker rm $(docker ps -a | grep "$1" | awk '{ print $1 }')
+  cons=`docker ps -qf | grep "$1" | awk '{ print $1 }'`
+  docker stop $cons
+  docker rm $cons
  fi
 }
 
 drmi() {
  if [[ -n $1 ]];then
-  docker rmi $(docker images | grep "$1" | awk '{ print $1 ":" $2 }')
+  docker rmi $(docker images -a | grep "$1" | awk '{ print $3 }')
  fi
-}
-
-drmx() {
- docker rm $(docker ps -qf status=exited)
- docker rmi $(docker images -qf dangling=true)
 }
 
 dc() {
  docker-compose $@
 }
 
-dcmake() {
+dcbu() {
  dc build --no-cache $@
 }
 
-dcrun() {
+dcup() {
  dc up --build -d --force-recreate $@
 }
 
