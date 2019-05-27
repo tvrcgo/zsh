@@ -126,5 +126,6 @@ gsync() {
   git add -A
   git stash
   git pull -r
+  git push
   git stash pop -q
 }
