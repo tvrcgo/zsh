@@ -1,5 +1,5 @@
 
-alias gitrc="vi ~/.alias/git_alias.zsh"
+alias gitrc="vi ~/.zsh/lib/git.zsh"
 alias g="git"
 alias gi="git status"
 alias gps="git push"
@@ -40,8 +40,8 @@ gmg() {
   else
     rb=`remote_branch | grep $1`
     if [ ! -z "$rb" ]; then
-      echo "Merge remote branch: $rb"
-      echo $rb | xargs git merge --no-ff
+      echo "Merge remote branch: origin/$rb"
+      echo "origin/$rb" | xargs git merge --no-ff
     else
       echo "Oops, branch not found"
     fi
