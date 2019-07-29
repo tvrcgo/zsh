@@ -5,7 +5,7 @@ alias gi="git status"
 alias gps="git push"
 alias gpl="git pull -r"
 alias gm="git merge"
-alias gr="git rebase"
+alias grb="git rebase"
 alias gl="git log --color --graph --abbrev-commit --decorate --pretty=format:'%C(magenta)%h%Creset %C(auto)%d%Creset %C(white)%s%Creset %C(cyan)%cn,%Creset %C(cyan)%cr%Creset' --all"
 alias gcl="git clone"
 alias gcm="git commit -m"
@@ -27,7 +27,7 @@ remote_branch() {
   gb | grep remotes | awk -F remotes/origin/ '{ print $2 }'
 }
 
-gmg() {
+gmb() {
   if [ -z "$1" ]; then
     echo "Which branch to merge ?"
     return
