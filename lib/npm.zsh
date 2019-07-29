@@ -1,3 +1,3 @@
 
-alias release="npm version $1 -m 'Release v%s'"
+alias bump="npm version $1 -m 'Release v%s'"
 
