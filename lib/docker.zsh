@@ -59,11 +59,11 @@ dc() {
   docker-compose $@
 }
 
-dcbu() {
+dcbd() {
   docker-compose build --no-cache $@
 }
 
 dcup() {
-  docker-compose up --build -d --force-recreate $@
+  docker-compose up --build -d $@
 }
 
