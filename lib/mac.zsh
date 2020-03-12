@@ -28,6 +28,7 @@ source ~/.config/z/z.sh
 alias f="z"
 
 # twitter-cli
-alias t="twitter update $@"
-alias tl="twitter home $@"
-alias ta="twitter user $@"
+alias t="twitter update"
+alias tl="twitter home"
+alias ta="twitter user"
+alias td="twitter destroy"
