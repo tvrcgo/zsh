@@ -20,7 +20,7 @@ alias ghpage-serve="bundle exec jekyll serve"
 alias vsc="/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/Resources/app/bin/code"
 
 # terminal proxy
-alias ss1='export http_proxy=http://127.0.0.1:1086 https_proxy=http://127.0.0.1:1086'
+alias ss1='export http_proxy=http://127.0.0.1:1087 https_proxy=http://127.0.0.1:1087'
 alias ss0='unset http_proxy https_proxy'
 
 # z jump
