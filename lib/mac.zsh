@@ -10,6 +10,12 @@ alias cls="clear"
 export SSH_KEY_PATH="~/.ssh/mbp15"
 alias sshrc="vi ~/.ssh/config"
 
+# fix damaged app
+fixapp() {
+  sudo spctl --master-disable
+  sudo xattr -rd com.apple.quarantine $@
+}
+
 # Deno
 export PATH=/Users/tvrcgo/.deno/bin:$PATH
 
