@@ -24,10 +24,17 @@ dlg() {
 }
 
 dls() {
+  # images
   print $fg[yellow]
-  docker images $@
+  docker images -f reference=${1-*} -f reference=${1-*/*}
+
+  # containers
   print $fg[green]
-  docker ps $@
+  docker ps -f name=$1
+
+  # networks
+  print $fg[blue]
+  docker network ls -f name=$1
 }
 
 dla() {
@@ -39,7 +46,7 @@ drun() {
 }
 
 dcmd() {
-  docker exec -it $(query_active_containers $1) ${2:-bash}
+  docker exec -it $(query_active_containers $1) /bin/${2:-bash}
 }
 
 drm() {
