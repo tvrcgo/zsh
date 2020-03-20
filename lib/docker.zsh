@@ -20,7 +20,7 @@ dk() {
 }
 
 dlg() {
-  docker logs $(query_active_containers $1)
+  docker logs $(query_containers $1)
 }
 
 dls() {
