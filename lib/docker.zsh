@@ -39,7 +39,11 @@ dls() {
 }
 
 drun() {
-  docker run -dit --name $1 ${2:-$1}
+  img_id=`query_images $1`
+  if [[ -n $1 ]]; then
+    echo "Run from image: $img_id"
+    docker run --rm -it --name run-img-$img_id ${2:-$img_id}
+  fi
 }
 
 dcmd() {
