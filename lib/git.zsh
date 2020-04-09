@@ -14,6 +14,7 @@ alias gca="git commit --amend --no-edit"
 alias gfr="git fetch origin --prune"
 alias gdf="git show --color --pretty=format:%b"
 alias gst="git stash"
+alias grvt="git reset HEAD^"
 
 current_branch() {
   git rev-parse --abbrev-ref HEAD
