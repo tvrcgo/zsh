@@ -2,6 +2,7 @@
 alias gitrc="vi ~/.zsh/lib/git.zsh"
 alias g="git"
 alias gi="git status"
+alias ga="git add -A"
 alias gps="git push"
 alias gpl="git pull --rebase"
 alias gm="git merge"
@@ -123,10 +124,9 @@ gtda() {
   gtdr $1
 }
 
-gsync() {
+gupd() {
   git add -A
   git stash
-  git pull -r
-  git push
+  git pull --rebase
   git stash pop -q
 }
