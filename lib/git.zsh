@@ -102,6 +102,10 @@ gbda() {
 }
 
 gt() {
+  git tag $@
+}
+
+gtl() {
   if [ ! -z "$1" ]; then
     git tag -l | grep $1
   else
@@ -111,22 +115,15 @@ gt() {
 
 gtd() {
   echo "Remove local tag: $1"
-  gt $1 | xargs -I {} git tag -d {}
+  gtl $1 | xargs -I {} git tag -d {}
 }
 
 gtdr() {
   echo "Remove remote tag: $1"
-  gt $1 | xargs -I {} git push origin --delete tag {}
+  gtl $1 | xargs -I {} git push origin --delete tag {}
 }
 
 gtda() {
   gtd $1
   gtdr $1
-}
-
-gupd() {
-  git add -A
-  git stash
-  git pull --rebase
-  git stash pop -q
 }
