@@ -31,7 +31,7 @@ alias ss0='unset http_proxy https_proxy'
 
 # z jump
 source ~/.zsh/bin/z/z.sh
-alias f="z"
+#alias f="z"
 
 # twitter-cli
 alias t="twitter update"
