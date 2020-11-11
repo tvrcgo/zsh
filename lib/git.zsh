@@ -100,8 +100,8 @@ gbdr() {
 }
 
 gbda() {
-  gbd $1
   gbdr $1
+  gbd $1
 }
 
 query_tag() {
@@ -123,6 +123,12 @@ gtdr() {
 }
 
 gtda() {
-  gtd $1
   gtdr $1
+  gtd $1
+}
+
+gtc() {
+  COMMIT_HASH=$(git rev-parse --short HEAD)
+  echo "Create tag: hash-${COMMIT_HASH}"
+  git tag hash-${COMMIT_HASH}
 }
