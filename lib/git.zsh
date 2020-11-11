@@ -129,6 +129,7 @@ gtda() {
 
 gtc() {
   COMMIT_HASH=$(git rev-parse --short HEAD)
-  echo "Create tag: hash-${COMMIT_HASH}"
-  git tag hash-${COMMIT_HASH}
+  BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+  echo "Create tag: ${BRANCH_NAME}-${COMMIT_HASH}"
+  git tag ${BRANCH_NAME}-${COMMIT_HASH}
 }
