@@ -3,20 +3,22 @@ alias gitrc="vi ~/.zsh/lib/git.zsh"
 alias g="git"
 alias gi="git status"
 alias ga="git add -A"
-alias gps="git push"
-alias gpl="git pull --rebase"
+alias gp="git push"
+alias gpt="git push --tags"
+alias gpr="git pull --rebase"
 alias gm="git merge"
-alias grb="git rebase"
+alias gr="git rebase"
 alias gl="git log --color --graph --abbrev-commit --decorate --pretty=format:'%C(magenta)%h%Creset %C(auto)%d%Creset %C(white)%s%Creset %C(cyan)%cn,%Creset %C(cyan)%cr%Creset' --all"
 alias gcl="git clone"
 alias gc="git commit -m"
-alias gcu="git commit --amend -m"
-alias gca="git commit --amend --no-edit"
-alias gfr="git fetch origin --prune"
+alias gam="git commit --amend --no-edit"
+alias gamm="git commit --amend -m"
+alias gfh="git fetch origin --prune"
 alias gdf="git show --color --pretty=format:%b"
 alias gs="git stash"
 alias gsp="git stash pop"
 alias grsh="git reset HEAD^"
+alias gt="git tag"
 
 current_branch() {
   git rev-parse --abbrev-ref HEAD
@@ -102,11 +104,7 @@ gbda() {
   gbdr $1
 }
 
-gt() {
-  git tag $@
-}
-
-gtl() {
+query_tag() {
   if [ ! -z "$1" ]; then
     git tag -l | grep $1
   else
@@ -116,12 +114,12 @@ gtl() {
 
 gtd() {
   echo "Remove local tag: $1"
-  gtl $1 | xargs -I {} git tag -d {}
+  query_tag $1 | xargs -I {} git tag -d {}
 }
 
 gtdr() {
   echo "Remove remote tag: $1"
-  gtl $1 | xargs -I {} git push origin --delete tag {}
+  query_tag $1 | xargs -I {} git push origin :refs/tags/{}
 }
 
 gtda() {
