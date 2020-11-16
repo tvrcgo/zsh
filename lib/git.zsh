@@ -3,7 +3,6 @@ alias gitrc="vi ~/.zsh/lib/git.zsh"
 alias g="git"
 alias gi="git status"
 alias ga="git add -A"
-alias gp="git push"
 alias gpt="git push --tags"
 alias gpr="git pull --rebase"
 alias gm="git merge"
@@ -30,6 +29,11 @@ local_branch() {
 
 remote_branch() {
   gb | grep remotes | awk -F remotes/origin/ '{ print $2 }'
+}
+
+gp() {
+  git push --follow-tags
+  git push --tags
 }
 
 gmb() {
@@ -81,6 +85,15 @@ gkb() {
   git checkout -b $1 ${2-HEAD}
 }
 
+gkfb() {
+  COMMIT_HASH=$(git rev-parse --short HEAD)
+  DATE=$(date +"%y%m%d%H%M")
+  echo -n "Short description about feature ? " && read desc
+  SUFFIX=$([[ ! -z $desc ]] && echo "_$desc" || echo "")
+  TARGET_BRANCH=feature/${DATE}_${COMMIT_HASH}${SUFFIX}
+  gkb ${TARGET_BRANCH}
+}
+
 gb() {
   if [ ! -z "$1" ]; then
     git branch -a | grep $1
@@ -90,12 +103,16 @@ gb() {
 }
 
 gbd() {
-  echo "Remove local branch: $1"
+  echo "Search local branch: $1\n"
+  echo "$(local_branch | grep $1)\n"
+  echo "Deleting...\n"
   local_branch | grep $1 | xargs git branch -D
 }
 
 gbdr() {
-  echo "Remove remote branch: $1"
+  echo "Search remote branch: $1\n"
+  echo "$(remote_branch | grep $1)\n"
+  echo "Deleting...\n"
   remote_branch | grep $1 | xargs -I {} git push origin :{}
 }
 
@@ -113,12 +130,14 @@ query_tag() {
 }
 
 gtd() {
-  echo "Remove local tag: $1"
+  echo "Search tag: $1\n"
+  echo "$(query_tag $1)\n"
   query_tag $1 | xargs -I {} git tag -d {}
 }
 
 gtdr() {
-  echo "Remove remote tag: $1"
+  echo "Search tag: $1\n"
+  echo "$(query_tag $1)\n"
   query_tag $1 | xargs -I {} git push origin :refs/tags/{}
 }
 
