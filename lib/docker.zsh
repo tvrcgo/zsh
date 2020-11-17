@@ -15,10 +15,7 @@ query_images() {
 }
 
 remove_none_images() {
-  imgs=`docker images --filter "dangling=true" -q --no-trunc`
-  if [[ -n $imgs ]]; then
-    docker rmi $imgs
-  fi
+  docker images --filter "dangling=true" -q --no-trunc | xargs docker rmi
 }
 
 dk() {
