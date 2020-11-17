@@ -20,7 +20,11 @@ alias gsp="git stash pop"
 alias grsh="git reset HEAD^"
 alias gt="git tag"
 
-current_branch() {
+head_commit() {
+  git rev-parse --short HEAD
+}
+
+head_branch() {
   git rev-parse --abbrev-ref HEAD
 }
 
@@ -87,11 +91,9 @@ gkb() {
 }
 
 gkfb() {
-  COMMIT_HASH=$(git rev-parse --short HEAD)
   DATE=$(date +"%y%m%d%H%M")
-  echo -n "Short description about feature ? " && read desc
-  SUFFIX=$([[ ! -z $desc ]] && echo "_$desc" || echo "")
-  TARGET_BRANCH=feature/${DATE}_${COMMIT_HASH}${SUFFIX}
+  SUFFIX=$([[ ! -z $1 ]] && echo "_$1" || echo "")
+  TARGET_BRANCH=feature/${DATE}_$(head_commit)${SUFFIX}
   gkb ${TARGET_BRANCH}
 }
 
@@ -148,8 +150,6 @@ gtda() {
 }
 
 gtc() {
-  COMMIT_HASH=$(git rev-parse --short HEAD)
-  BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
-  echo "Create tag: ${BRANCH_NAME}-${COMMIT_HASH}"
-  git tag ${BRANCH_NAME}-${COMMIT_HASH}
+  echo "Create tag: $(head_branch)-$(head_commit)"
+  git tag $(head_branch)-$(head_commit)
 }
