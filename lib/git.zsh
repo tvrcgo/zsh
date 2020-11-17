@@ -6,7 +6,6 @@ alias ga="git add -A"
 alias gpt="git push --tags"
 alias gpf="git push --force"
 alias gpr="git pull --rebase"
-alias gm="git merge"
 alias gr="git rebase"
 alias gl="git log --color --graph --abbrev-commit --decorate --pretty=format:'%C(magenta)%h%Creset %C(auto)%d%Creset %C(white)%s%Creset %C(cyan)%cn,%Creset %C(cyan)%cr%Creset' --all"
 alias gcl="git clone"
@@ -28,12 +27,20 @@ head_branch() {
   git rev-parse --abbrev-ref HEAD
 }
 
+query_branch() {
+  git branch -a | grep ${1-""}
+}
+
 local_branch() {
-  gb | grep -v remotes
+  query_branch | grep -v remotes
 }
 
 remote_branch() {
-  gb | grep remotes | awk -F remotes/origin/ '{ print $2 }'
+  query_branch | grep remotes | awk -F remotes/origin/ '{ print $2 }'
+}
+
+query_tag() {
+  git tag -l | grep ${1-""}
 }
 
 gp() {
@@ -97,14 +104,6 @@ gkfb() {
   gkb ${TARGET_BRANCH}
 }
 
-gb() {
-  if [ ! -z "$1" ]; then
-    git branch -a | grep $1
-  else
-    git branch -a
-  fi
-}
-
 gbd() {
   echo "Search local branch: $1\n"
   echo "$(local_branch | grep $1)\n"
@@ -119,19 +118,6 @@ gbdr() {
   remote_branch | grep $1 | xargs -I {} git push origin :{}
 }
 
-gbda() {
-  gbdr $1
-  gbd $1
-}
-
-query_tag() {
-  if [ ! -z "$1" ]; then
-    git tag -l | grep $1
-  else
-    git tag -l
-  fi
-}
-
 gtd() {
   echo "Search tag: $1\n"
   echo "$(query_tag $1)\n"
@@ -142,11 +128,6 @@ gtdr() {
   echo "Search tag: $1\n"
   echo "$(query_tag $1)\n"
   query_tag $1 | xargs -I {} git push origin :refs/tags/{}
-}
-
-gtda() {
-  gtdr $1
-  gtd $1
 }
 
 gtc() {
