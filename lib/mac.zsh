@@ -30,7 +30,7 @@ alias ss1='export http_proxy=http://127.0.0.1:1087 https_proxy=http://127.0.0.1:
 alias ss0='unset http_proxy https_proxy'
 
 # z jump
-source ~/.zsh/bin/z/z.sh
+source ~/.zsh/bin/z.sh
 #alias f="z"
 
 # twitter-cli
