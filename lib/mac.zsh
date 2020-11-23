@@ -23,7 +23,7 @@ export PATH=/Users/tvrcgo/.deno/bin:$PATH
 alias ghpage-serve="bundle exec jekyll serve"
 
 # VS Code
-alias vsc="/Applications/Visual\ Studio\ Code\ -\ Insiders.app/Contents/Resources/app/bin/code"
+alias vsc="/Applications/Visual\ Studio\ Code*.app/Contents/Resources/app/bin/code"
 
 # terminal proxy
 alias ss1='export http_proxy=http://127.0.0.1:1087 https_proxy=http://127.0.0.1:1087'
